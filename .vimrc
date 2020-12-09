@@ -131,7 +131,7 @@ Plug 'tpope/vim-commentary' " commentray easily
 
 Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parens, quotes in pair.
     " This sets |AutoPairs| to only match for parenthesis for 'FILETYPE'.
-    au Filetype tex let b:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"'}
+    au Filetype tex let b:AutoPairs = {}
 
 
 """"""""""""
