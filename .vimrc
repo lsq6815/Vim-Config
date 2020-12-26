@@ -21,7 +21,7 @@ Plug 'junegunn/vim-plug' " vim-plug itself, just for its help document
 " Language Support "
 """"""""""""""""""""
 " Support native senmatic c/c++ auto-completion, and auto-completion for JavaScript and TypeScript
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --ts-completer --java-completer'} " Super auto-completion 
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --ts-completer --all'} " Super auto-completion 
     " Append new trigger to make it perfume more IDE like
     let g:ycm_semantic_triggers= {
         \ 'c,cpp,sh,bash,makefile,rust,python,java,go,prel': ['re!\w{2}'],
@@ -37,13 +37,16 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --ts-com
         \}
     set completeopt=menu,menuone                  " No preview window
     let g:ycm_add_preview_to_completeopt=0
+    let g:ycm_clangd_binary_path = "/usr/bin/clangd"
     " gh is by default used for select mode, change to GoTo 
     nnoremap gh :YcmCompleter GoTo<cr>
 
-Plug 'StanAngeloff/php.vim'                   " PHP language support
+Plug 'StanAngeloff/php.vim', {'for': 'php'}                   " PHP language support
 
 Plug 'plasticboy/vim-markdown'                " Syntax highlighting, matching rules and mappings for the original Markdown and extensions.
     let g:vim_markdown_math = 1                   " Enable LaTeX math
+
+Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && yarn install'}
 
 Plug 'mattn/emmet-vim'                        " A Emmet implementation for Vim
     let g:user_emmet_install_global = 1           
@@ -51,14 +54,18 @@ Plug 'mattn/emmet-vim'                        " A Emmet implementation for Vim
     let g:user_emmet_mode='nvi'                    " work for all mode +insert, +normal and +visual
     " let g:user_emmet_leader_key='<Space>'         " Redefine trigger key
 
-Plug 'vim-latex/vim-latex'
+Plug 'vim-latex/vim-latex', {'for': 'tex'}
     " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to 
     " 'plaintext' instead of 'tex', which results in vim-latex not being loaded.
     " The following changes the default filetype back to 'tex':
     let g:tex_flavor='latex'
 
-Plug 'sheerun/vim-polyglot'                  " A collection of language packs for Vim. But it mostly supplies more syntax highlight, so it more suited in Apperance area;)
+Plug 'sheerun/vim-polyglot'                      " A collection of language packs for Vim. But it mostly supplies more syntax highlight, so it more suited in Apperance area;)
     let g:polyglot_disabled = ['markdown']
+
+Plug 'rust-lang/rust.vim', {'for': 'rust'}                        " rust official language support
+
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'} " golang language support
 
 """"""""""""""
 " Appearance "
@@ -148,13 +155,15 @@ Plug 'vim-scripts/matchit.zip'         " extended % matching for HTML, LaTeX, an
 """""""""""""""
 " Plug 'tpope/vim-fugitive'              " A powerful bind of Git for Vim
 
-Plug 'sjl/gundo.vim'       " Visual undo tree manipulation
+Plug 'skywind3000/asyncrun.vim' " enable run command background
 
-Plug 'scrooloose/nerdtree' " File tree like modern IDE
+Plug 'sjl/gundo.vim'            " Visual undo tree manipulation
 
-Plug 'mileszs/ack.vim'     " built-in ack for Vim
+Plug 'scrooloose/nerdtree'      " File tree like modern IDE
 
-Plug 'majutsushi/tagbar'   " tag list
+Plug 'mileszs/ack.vim'          " built-in ack for Vim
+
+Plug 'majutsushi/tagbar'        " tag list
 
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
     " Uncomment to override defaults:
@@ -199,7 +208,7 @@ set tabstop=4                 " Number of spaces that a <Tab> in the file counts
 if has("termguicolors")
     set termguicolors                   " true color terminal, beyond term256color
 endif
-colorscheme dracula                 " change the color scheme
+colorscheme gruvbox                 " change the color scheme
 set background=dark                 " As the name say
 set guifont=Fira\ Code\ Regular\ 15 " The default font is too ugly, and size is too small
 set showcmd                         " show key pressed in status bar on normal mode
