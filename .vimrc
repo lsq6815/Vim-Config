@@ -40,6 +40,12 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --ts-com
     let g:ycm_clangd_binary_path = "/usr/bin/clangd"
     " gh is by default used for select mode, change to GoTo 
     nnoremap gh :YcmCompleter GoTo<cr>
+    " Disable Linting built-in with ycm
+    let g:ycm_enable_diagnostic_signs = 0
+    let g:ycm_enable_diagnostic_highlighting = 0
+
+Plug 'dense-analysis/ale' " have had enough with ycm's linting
+
 
 Plug 'StanAngeloff/php.vim', {'for': 'php'}                   " PHP language support
 
