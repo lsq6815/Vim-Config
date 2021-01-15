@@ -52,7 +52,7 @@ Plug 'StanAngeloff/php.vim', {'for': 'php'} " PHP language support
 Plug 'plasticboy/vim-markdown'              " Syntax highlighting, matching rules and mappings for the original Markdown and extensions.
     let g:vim_markdown_math = 1             " Enable LaTeX math
 
-Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && yarn install'}
+Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && ./install.sh'}
 
 Plug 'mattn/emmet-vim'                                       " A Emmet implementation for Vim
     let g:user_emmet_install_global = 1
