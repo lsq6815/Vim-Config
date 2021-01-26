@@ -200,6 +200,16 @@ set tabstop=4                 " Number of spaces that a <Tab> in the file counts
 if has("termguicolors")
     set termguicolors                   " true color terminal, beyond term256color
 endif
+
+if has("autocmd")
+    " define your skeleton/template file here
+    augroup templates
+        autocmd BufNewFile *.sh 0r ~/.vim/templates/skeleton.sh
+        autocmd BufNewFile *.c 0r ~/.vim/templates/skeleton.c
+        autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
+    augroup END
+endif
+
 colorscheme gruvbox                 " change the color scheme
 set background=dark                 " As the name say
 set guifont=Fira\ Code\ Regular\ 15 " The default font is too ugly, and size is too small
@@ -207,10 +217,6 @@ set showcmd                         " show key pressed in status bar on normal m
 set incsearch                       " Enable searching as you type, rather than waiting till you press enter.
 set number                          " set the line number
 set cursorline                      " set the current line highlighting
-" set relativenumber " set the number relative to your current line 
-" Not suggested. Its advance is that you can move faster with j and k when
-" line number is bigger, while the shortcoming is that the will to some degree
-" discount the power of EX command 
 
 " Disable audible bell because it's annoying.
 set noerrorbells visualbell t_vb=
