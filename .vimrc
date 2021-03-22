@@ -21,7 +21,7 @@ Plug 'junegunn/vim-plug' " vim-plug itself, just for its help document
 " Language Support "
 """"""""""""""""""""
 " Support native senmatic c/c++ auto-completion, and auto-completion for JavaScript and TypeScript
-Plug 'Valloric/YouCompleteMe', { 'do': 'sudo ./install.py --clangd-completer --ts-completer --java-completer --ruts-completer --go-completer --cs-completer'} " Super auto-completion 
+Plug 'Valloric/YouCompleteMe', { 'do': 'sudo ./install.py --clangd-completer --ts-completer --java-completer --rust-completer --go-completer --cs-completer'} " Super auto-completion 
     " Append new trigger to make it perfume more IDE like
     let g:ycm_semantic_triggers= {
         \ 'c,cpp,sh,bash,makefile,rust,python,java,go,prel': ['re!\w{2}'],
@@ -44,13 +44,14 @@ Plug 'Valloric/YouCompleteMe', { 'do': 'sudo ./install.py --clangd-completer --t
     let g:ycm_enable_diagnostic_signs = 0
     let g:ycm_enable_diagnostic_highlighting = 0
 
-Plug 'dense-analysis/ale'                   " have had enough with ycm's linting
+Plug 'dense-analysis/ale'                                " have had enough with ycm's linting
 
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } } " DoGe is a Documentation Generator
 
-Plug 'StanAngeloff/php.vim', {'for': 'php'} " PHP language support
+Plug 'StanAngeloff/php.vim', {'for': 'php'}              " PHP language support
 
-Plug 'plasticboy/vim-markdown'              " Syntax highlighting, matching rules and mappings for the original Markdown and extensions.
-    let g:vim_markdown_math = 1             " Enable LaTeX math
+Plug 'plasticboy/vim-markdown'                           " Syntax highlighting, matching rules and mappings for the original Markdown and extensions.
+    let g:vim_markdown_math = 1                          " Enable LaTeX math
 
 Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && ./install.sh'}
 
@@ -170,7 +171,7 @@ Plug 'mileszs/ack.vim'          " built-in ack for Vim
 
 Plug 'majutsushi/tagbar'        " tag list
 
-" Plug 'https://github.com/tpope/vim-eunuch.git'    " Vim sugar for the UNIX shell commands that need it the most
+Plug 'https://github.com/tpope/vim-eunuch.git'    " Vim sugar for the UNIX shell commands that need it the most
 
 call plug#end()
 " Regenerate tags file every time matched file is saved
