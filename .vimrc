@@ -1,4 +1,4 @@
-" if vim-plug is not installed, then install 
+" install vim-plug if yet not installed
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
         \https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -22,25 +22,24 @@ Plug 'junegunn/vim-plug' " vim-plug itself, just for its help document
 """"""""""""""""""""
 " Support native senmatic c/c++ auto-completion, and auto-completion for JavaScript and TypeScript
 Plug 'Valloric/YouCompleteMe', { 'do': 'sudo ./install.py --clangd-completer --ts-completer --java-completer --rust-completer --go-completer --cs-completer'} " Super auto-completion 
-    " Append new trigger to make it perfume more IDE like
+    " semantic auto-completion is not set by default
     let g:ycm_semantic_triggers= {
         \ 'c,cpp,sh,bash,makefile,rust,python,java,go,prel': ['re!\w{2}'],
         \ 'cs,lua,html,css,javascript,typescript,php': ['re!\w{2}'], 
         \ }
-    " will overwrite semantic completion, do not set to 1
-    " let g:ycm_min_num_of_chars_for_completion = 1 " Note that the word completion here means identifier-based completion. This option is NOT used for semantic completion
     " I want to use C++17 standard, do not warning me!
     let g:ycm_filter_diagnostics = {
         \ "cpp": {
             \ "regex": ["17", ],
             \    }
         \}
-    set completeopt=menu,menuone                  " No preview window
+    set completeopt=menu,menuone                 
+    " No annoying preview window
     let g:ycm_add_preview_to_completeopt=0
     let g:ycm_clangd_binary_path = "/usr/bin/clangd"
-    " gh is by default used for select mode, change to GoTo 
+    " gh is by default used for select mode(as weaker visual mode), change it to GoTo 
     nnoremap gh :YcmCompleter GoTo<cr>
-    " Disable Linting built-in with ycm
+    " Disable built-in Lint, using ale instead
     let g:ycm_enable_diagnostic_signs = 0
     let g:ycm_enable_diagnostic_highlighting = 0
 
@@ -50,34 +49,34 @@ Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } } " DoGe is a Documentati
 
 Plug 'StanAngeloff/php.vim', {'for': 'php'}              " PHP language support
 
-Plug 'plasticboy/vim-markdown'                           " Syntax highlighting, matching rules and mappings for the original Markdown and extensions.
+Plug 'plasticboy/vim-markdown', {'for': 'markdown'}      " Syntax highlighting, matching rules and mappings for the original Markdown and extensions.
     let g:vim_markdown_math = 1                          " Enable LaTeX math
 
-Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && ./install.sh'}
+Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && ./install.sh', 'for': 'markdown'} " Markdown preview based on Web
 
 Plug 'mattn/emmet-vim'                                       " A Emmet implementation for Vim
     let g:user_emmet_install_global = 1
     autocmd FileType html,css,php,md,javascript EmmetInstall
     let g:user_emmet_mode='nvi'                              " work for all mode +insert, +normal and +visual
 
-Plug 'vim-latex/vim-latex', {'for': 'tex'}
+Plug 'vim-latex/vim-latex', {'for': 'tex'}                   " old yet powerful
     " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to 
     " 'plaintext' instead of 'tex', which results in vim-latex not being loaded.
     " The following changes the default filetype back to 'tex':
     let g:tex_flavor='latex'
 
-Plug 'sheerun/vim-polyglot'                      " A collection of language packs for Vim. But it mostly supplies more syntax highlight, so it more suited in Apperance area;)
-    let g:polyglot_disabled = ['markdown']
+Plug 'sheerun/vim-polyglot'                " A collection of language packs for Vim. But it mostly supplies more syntax highlight, so it more suited in Apperance area;)
+    let g:polyglot_disabled = ['markdown'] " Already has vim-markdown
 
-Plug 'rust-lang/rust.vim', {'for': 'rust'}       " rust official language support
+Plug 'rust-lang/rust.vim', {'for': 'rust'}                    " rust official language support
 
-Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'} " golang language support
+Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries', 'for': 'go'} " golang language support
 
 """"""""""""""
 " Appearance "
 """"""""""""""
 
-" Beware of that, colorschemes are based on syntax, if your used the built-in
+" Beware of that colorschemes are based on syntax, if your used the built-in
 " syntax, then some highlight setting may no work at all!, add some langauges
 " syntax plug-in to improve the perfermence, like the vim-polyglot plug-in
 
@@ -120,7 +119,7 @@ Plug 'vim-airline/vim-airline-themes'       " Themes for airline
 
 Plug 'luochen1990/rainbow'                  " Support rainbow parentheses
     let g:rainbow_active = 1                " set to 0 if you want to enable it later via :RainbowToggle
-    " Disable rainbow for css and html
+    " Disable rainbow for css and html, because it disable the highlight for html tag attribute
     let g:rainbow_conf = {
             \   'separately': {
                 \   '*': {},
@@ -144,6 +143,7 @@ Plug 'tpope/vim-commentary' " commentray easily
 
 Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parens, quotes in pair.
     " This sets |AutoPairs| to only match for parenthesis listed in {} for 'FILETYPE'.
+    " which in here is none
     au Filetype tex let b:AutoPairs = {}
 
 
@@ -167,11 +167,13 @@ Plug 'sjl/gundo.vim'            " Visual undo tree manipulation
 
 Plug 'scrooloose/nerdtree'      " File tree like modern IDE
 
-Plug 'mileszs/ack.vim'          " built-in ack for Vim
+" Plug 'mileszs/ack.vim'          " built-in ack for Vim
 
 Plug 'majutsushi/tagbar'        " tag list
 
-Plug 'https://github.com/tpope/vim-eunuch.git'    " Vim sugar for the UNIX shell commands that need it the most
+" Vim sugar for the UNIX shell commands that need it the most, 
+" no need `r! sudo tee % > /dev/null` just SudoWrite
+Plug 'https://github.com/tpope/vim-eunuch.git'    
 
 call plug#end()
 " Regenerate tags file every time matched file is saved
@@ -208,6 +210,7 @@ if has("autocmd")
         autocmd BufNewFile *.sh 0r ~/.vim/templates/skeleton.sh
         autocmd BufNewFile *.c 0r ~/.vim/templates/skeleton.c
         autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
+        autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
     augroup END
 endif
 
