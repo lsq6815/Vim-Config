@@ -28,15 +28,15 @@ Plug 'Valloric/YouCompleteMe', { 'do': 'sudo ./install.py --clangd-completer --t
         \ 'cs,lua,html,css,javascript,typescript,php': ['re!\w{2}'], 
         \ }
     " I want to use C++17 standard, do not warning me!
-    let g:ycm_filter_diagnostics = {
-        \ "cpp": {
-            \ "regex": ["17", ],
-            \    }
-        \}
+    " let g:ycm_filter_diagnostics = {
+    "     \ 'cpp': {
+    "         \ 'regex': ['17', ],
+    "         \    }
+    "     \}
     set completeopt=menu,menuone                 
     " No annoying preview window
     let g:ycm_add_preview_to_completeopt=0
-    let g:ycm_clangd_binary_path = "/usr/bin/clangd"
+    let g:ycm_clangd_binary_path = '/usr/bin/clangd'
     " gh is by default used for select mode(as weaker visual mode), change it to GoTo 
     nnoremap gh :YcmCompleter GoTo<cr>
     " Disable built-in Lint, using ale instead
@@ -44,6 +44,12 @@ Plug 'Valloric/YouCompleteMe', { 'do': 'sudo ./install.py --clangd-completer --t
     let g:ycm_enable_diagnostic_highlighting = 0
 
 Plug 'dense-analysis/ale'                                " have had enough with ycm's linting
+    let g:ale_c_cc_options = '-Wall -O2 -std=c99'
+    let g:ale_cpp_cc_options = '-Wall -O2 -std=c++1z'
+    let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+    let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++1z'
+    let g:ale_c_clang_options = '-Wall -O2 -std=c99'
+    let g:ale_cpp_clang_options = '-Wall -O2 -std=c++1z'
 
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } } " DoGe is a Documentation Generator
 
@@ -56,7 +62,9 @@ Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && ./install.sh', 'for': 'ma
 
 Plug 'mattn/emmet-vim'                                       " A Emmet implementation for Vim
     let g:user_emmet_install_global = 1
-    autocmd FileType html,css,php,md,javascript EmmetInstall
+    augroup emmetVim
+        autocmd FileType html,css,php,md,javascript EmmetInstall
+    augroup END
     let g:user_emmet_mode='nvi'                              " work for all mode +insert, +normal and +visual
 
 Plug 'vim-latex/vim-latex', {'for': 'tex'}                   " old yet powerful
@@ -144,7 +152,9 @@ Plug 'tpope/vim-commentary' " commentray easily
 Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parens, quotes in pair.
     " This sets |AutoPairs| to only match for parenthesis listed in {} for 'FILETYPE'.
     " which in here is none
-    au Filetype tex let b:AutoPairs = {}
+    augroup autoPairs
+        au Filetype tex let b:AutoPairs = {}
+    augroup END
 
 
 """"""""""""
@@ -180,7 +190,6 @@ call plug#end()
 " some error occur, comment it temporarily
 " autocmd BufWritePost *.py *.c *.cpp *.h *.hpp *.js *.ts silent! !ctags -R &
 
-set nocompatible          " F**K vi, vim to the win
 syntax enable             " support syntax highlight, set on, then vim will overwrite your setting, using enable to enable most features of colorschemes
 filetype plugin indent on " auto indent according to different file type
 
@@ -200,17 +209,18 @@ set tabstop=4                 " Number of spaces that a <Tab> in the file counts
 
 " set backspace=2 " change the behavior of Backspace in most of terminal
 " just make the backspace work when in insert mode, better use <c-h> instead 
-if has("termguicolors")
+if has('termguicolors')
     set termguicolors                   " true color terminal, beyond term256color
 endif
 
-if has("autocmd")
+if has('autocmd')
     " define your skeleton/template file here
     augroup templates
         autocmd BufNewFile *.sh 0r ~/.vim/templates/skeleton.sh
         autocmd BufNewFile *.c 0r ~/.vim/templates/skeleton.c
         autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
         autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+        autocmd BufNewFile makefile,Makefile,GMakefile 0r ~/.vim/templates/makefile
     augroup END
 endif
 
