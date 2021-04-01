@@ -6,11 +6,12 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 " use vim-plug to manage plugins  
-" to add plugins in github use <username>/<repo> e.g. scrooloose/nerdtree
+" to add plugins in github use <username>/<repo> 
+" Example: scrooloose/nerdtree
 " you can find plugins in vim.org github.com and vimawesome.com
 " I recommend vimawesome.com, because it scrape plugins from the first two
 " website
-call plug#begin()
+call plug#begin('~/.vim/plugged')
 """"""""""""""""""
 " Global Setting "
 """"""""""""""""""
@@ -20,28 +21,13 @@ Plug 'junegunn/vim-plug' " vim-plug itself, just for its help document
 """"""""""""""""""""
 " Language Support "
 """"""""""""""""""""
-" Support native senmatic c/c++ auto-completion, and auto-completion for JavaScript and TypeScript
-Plug 'Valloric/YouCompleteMe', { 'do': 'sudo ./install.py --clangd-completer --ts-completer --java-completer --rust-completer --go-completer --cs-completer'} " Super auto-completion 
-    " semantic auto-completion is not set by default
-    let g:ycm_semantic_triggers= {
-        \ 'c,cpp,sh,bash,makefile,rust,python,java,go,prel': ['re!\w{2}'],
-        \ 'cs,lua,html,css,javascript,typescript,php': ['re!\w{2}'], 
-        \ }
-    " I want to use C++17 standard, do not warning me!
-    " let g:ycm_filter_diagnostics = {
-    "     \ 'cpp': {
-    "         \ 'regex': ['17', ],
-    "         \    }
-    "     \}
-    set completeopt=menu,menuone                 
-    " No annoying preview window
-    let g:ycm_add_preview_to_completeopt=0
-    let g:ycm_clangd_binary_path = '/usr/bin/clangd'
-    " gh is by default used for select mode(as weaker visual mode), change it to GoTo 
-    nnoremap gh :YcmCompleter GoTo<cr>
-    " Disable built-in Lint, using ale instead
-    let g:ycm_enable_diagnostic_signs = 0
-    let g:ycm_enable_diagnostic_highlighting = 0
+
+Plug 'neoclide/coc.nvim', { 'branch': 'release' } " smooth lsp experience like VScode
+    let g:coc_global_extensions = [ 
+                \ 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 
+                \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp',
+                \ ]
+    let g:tex_flavor = 'latex' " prevent Vim for treat empty .tex file as plaintext
 
 Plug 'dense-analysis/ale'                                " have had enough with ycm's linting
     let g:ale_c_cc_options = '-Wall -O2 -std=c99'
@@ -53,7 +39,7 @@ Plug 'dense-analysis/ale'                                " have had enough with 
 
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } } " DoGe is a Documentation Generator
 
-Plug 'StanAngeloff/php.vim', {'for': 'php'}              " PHP language support
+" Plug 'StanAngeloff/php.vim', {'for': 'php'}              " PHP language support
 
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}      " Syntax highlighting, matching rules and mappings for the original Markdown and extensions.
     let g:vim_markdown_math = 1                          " Enable LaTeX math
@@ -67,18 +53,17 @@ Plug 'mattn/emmet-vim'                                       " A Emmet implement
     augroup END
     let g:user_emmet_mode='nvi'                              " work for all mode +insert, +normal and +visual
 
-Plug 'vim-latex/vim-latex', {'for': 'tex'}                   " old yet powerful
-    " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to 
-    " 'plaintext' instead of 'tex', which results in vim-latex not being loaded.
-    " The following changes the default filetype back to 'tex':
-    let g:tex_flavor='latex'
+" Plug 'vim-latex/vim-latex', {'for': 'tex'}                   " old yet powerful
+"     " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to 
+"     " 'plaintext' instead of 'tex', which results in vim-latex not being loaded.
+"     " The following changes the default filetype back to 'tex':
 
 Plug 'sheerun/vim-polyglot'                " A collection of language packs for Vim. But it mostly supplies more syntax highlight, so it more suited in Apperance area;)
     let g:polyglot_disabled = ['markdown'] " Already has vim-markdown
 
-Plug 'rust-lang/rust.vim', {'for': 'rust'}                    " rust official language support
+" Plug 'rust-lang/rust.vim', {'for': 'rust'}                    " rust official language support
 
-Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries', 'for': 'go'} " golang language support
+" Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries', 'for': 'go'} " golang language support
 
 """"""""""""""
 " Appearance "
@@ -138,6 +123,8 @@ Plug 'luochen1990/rainbow'                  " Support rainbow parentheses
 
 Plug 'ap/vim-css-color'                     " Css color preview
 
+Plug 'Yggdroot/indentLine'                  " indentation
+
 """"""""
 " Edit "
 """"""""
@@ -186,9 +173,157 @@ Plug 'majutsushi/tagbar'        " tag list
 Plug 'https://github.com/tpope/vim-eunuch.git'    
 
 call plug#end()
-" Regenerate tags file every time matched file is saved
-" some error occur, comment it temporarily
-" autocmd BufWritePost *.py *.c *.cpp *.h *.hpp *.js *.ts silent! !ctags -R &
+
+""""""""""""""""""""""""""""""""""""""
+" Settings below is required by coc, " 
+" i omitted some configure            "
+" Example: i don't want to use <tab> "
+" for completion                     "
+""""""""""""""""""""""""""""""""""""""
+
+set encoding=utf-8 " Anyone with sane use Unicode, and coc.nvim use it too
+set hidden         " TextEdit might fail if hidden is not set
+set nobackup       " Some servers have issues with backup files, see #649
+set nowritebackup
+set cmdheight=2    " Give more space for displaying message
+set updatetime=300 " Avoid delays and improve user experience
+set shortmess+=c   " Don't send message to ins-completion-menu
+
+" Always show the signcolumn
+if has("patch-8.1.1564")
+    " Recently vim can merge sign column with number column
+    set signcolumn=number
+else
+    set signcolumn=yes
+endif
+
+" Use <c-space> to trigger completion
+if has('nvim')
+    inoremap <silent><expr> <c-space> coc#refresh()
+else
+    inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Make <CR> auto-select the first completion item and notify coc.nvim to
+" format on enter, <cr> could be remapped by other vim plugin
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" For all diagnostics use `:CocDiagnostic`
+nmap <silent> [g <Plug>(coc-diagnostic-perv)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use `K` to show doc in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+function! s:show_documentation()
+    " Use Vim built-in help document if available
+    if (index(['vim','help'], &filetype) >= 0)
+        execute 'h '.expand('<cword>')
+    elseif (coc#rpc#ready())
+        call CocActionAsync('doHover')
+    else
+        execute '!' . &keywordprg . " " . expand('<cword>')
+    endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor (stop cursor
+" at symbol)
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming with `<leader>rn`
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code with `<leader>f`
+xmap <leader>f <Plug>(coc-format-selected)
+nmap <leader>f <Plug>(coc-format-selected)
+augroup cocgroup
+    autocmd!
+    " setup formatexpr specified filetype(s)
+    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+    " update signature help on jump placeholder
+    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a <Plug>(coc-codeaction-selected)
+nmap <leader>a <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer
+nmap <leader>ac <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line
+nmap <leader>qf <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" f: function
+" c: class
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?  coc#float#scroll(1) : "\<C-f>"
+    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?  coc#float#scroll(0) : "\<C-b>"
+    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?  "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?  "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ?  coc#float#scroll(1) : "\<C-f>"
+    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ?  coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer
+command! -nargs=? Fold :call CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer
+command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoClist
+" Show all diagnostics
+nnoremap <silent><nowait> <space>a :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+"""""""""""""""
+" My settings "
+"""""""""""""""
 
 syntax enable             " support syntax highlight, set on, then vim will overwrite your setting, using enable to enable most features of colorschemes
 filetype plugin indent on " auto indent according to different file type
@@ -224,28 +359,12 @@ if has('autocmd')
     augroup END
 endif
 
-colorscheme gruvbox                 " change the color scheme
+colorscheme dracula                 " change the color scheme
 set background=dark                 " As the name say
-set guifont=Fira\ Code\ Regular\ 15 " The default font is too ugly, and size is too small
-set showcmd                         " show key pressed in status bar on normal mode
+set nocursorline                      " set the current line highlighting
 set incsearch                       " Enable searching as you type, rather than waiting till you press enter.
 set number                          " set the line number
-set cursorline                      " set the current line highlighting
+set showcmd                         " show key pressed in status bar on normal mode
 
 " Disable audible bell because it's annoying.
 set noerrorbells visualbell t_vb=
-
-" if you want disable <up>/<dowm>/<left>/<right>
-"map <up> <nop>
-"map <down> <nop>
-"map <left> <nop>
-"map <right> <nop>
-
-" A very useful mapping
-" deprecated due to plug auto-pairs
-" replaced by auto-pairs
-" insert a pair of bracket in insert mode
-" inoremap ' ''<esc>i
-" inoremap " ""<esc>i
-" inoremap ( ()<esc>i
-" inoremap [ []<esc>i

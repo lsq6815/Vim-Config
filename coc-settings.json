@@ -1,0 +1,31 @@
+{
+    "languageserver": {
+        /**
+         * @target: C-family
+         * @install: sudo apt install ccls 
+         */
+        "ccls": {
+            "command": "ccls",
+            "filetypes": [ "c", "cc", "cpp", "c++", "objc", "objcpp" ],
+            "rootPatterns": [ ".ccls", "compile_commands.json", ".git/", ".hg/" ],
+            "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
+            }
+        },
+        
+        /**
+         * @target: CMake
+         * @install: pip3 install cmake-language-server 
+         */
+        "cmake": {
+            "command": "cmake-language-server",
+            "filetypes": [ "cmake" ],
+            "rootPatterns": [ "build/" ],
+            "initializationOptions": {
+                "buildDirectory": "build"
+            }
+        }
+    }
+}
