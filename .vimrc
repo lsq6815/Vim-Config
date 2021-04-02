@@ -1,117 +1,136 @@
-" install vim-plug if yet not installed
+" Install vim-plug if not installed
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-        \https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" use vim-plug to manage plugins  
+" Use vim-plug to manage plugins  
 " to add plugins in github use <username>/<repo> 
 " Example: scrooloose/nerdtree
 " you can find plugins in vim.org github.com and vimawesome.com
-" I recommend vimawesome.com, because it scrape plugins from the first two
+" I recommend vimawesome.com, because it collect plugins from the first two
 " website
+"
+" - Automatically executes `filetype plugin indent on` and `syntax enable`
 call plug#begin('~/.vim/plugged')
-""""""""""""""""""
-" Global Setting "
-""""""""""""""""""
-Plug 'junegunn/vim-plug' " vim-plug itself, just for its help document
-    let g:plug_timeout = 300 " Add timeout for plugin
+" vim-plug itself, just for its help document
+Plug 'junegunn/vim-plug' 
+    let g:plug_timeout = 300 " Time limit of each task in seconds (Ruby & Python)
 
 """"""""""""""""""""
 " Language Support "
 """"""""""""""""""""
-
-Plug 'neoclide/coc.nvim', { 'branch': 'release' } " smooth lsp experience like VScode
+" Smooth language-server-provider experience like VScode
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     let g:coc_global_extensions = [ 
                 \ 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 
                 \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp',
-                \ ]
+                \ 'coc-marketplace'
+                \]
     let g:tex_flavor = 'latex' " prevent Vim for treat empty .tex file as plaintext
 
-Plug 'dense-analysis/ale'                                " have had enough with ycm's linting
+Plug 'dense-analysis/ale'
     let g:ale_c_cc_options = '-Wall -O2 -std=c99'
     let g:ale_cpp_cc_options = '-Wall -O2 -std=c++1z'
     let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
     let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++1z'
     let g:ale_c_clang_options = '-Wall -O2 -std=c99'
     let g:ale_cpp_clang_options = '-Wall -O2 -std=c++1z'
-
-Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } } " DoGe is a Documentation Generator
+    
+" DoGe is a Documentation Generator
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
+    " Want to DoGe for language from other langauge, like Vue. Aliases it
+    let g:doge_filetype_aliases = {
+                \ 'javascript': [ 'vue' ]
+                \}
 
 " Plug 'StanAngeloff/php.vim', {'for': 'php'}              " PHP language support
 
-Plug 'plasticboy/vim-markdown', {'for': 'markdown'}      " Syntax highlighting, matching rules and mappings for the original Markdown and extensions.
-    let g:vim_markdown_math = 1                          " Enable LaTeX math
+" Syntax highlighting, matching rules and mappings for the original Markdown and extensions.
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+    let g:vim_markdown_math = 1 " Enable LaTeX math
 
-Plug 'iamcco/markdown-preview.nvim', {'do': 'cd app && ./install.sh', 'for': 'markdown'} " Markdown preview based on Web
+" Markdown preview based on Web
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && ./install.sh', 'for': 'markdown' }
 
-Plug 'mattn/emmet-vim'                                       " A Emmet implementation for Vim
+" A Emmet implementation for Vim 
+Plug 'mattn/emmet-vim'
+    " enable emmet-vim in which filetype 
+    autocmd FileType html,css,php,md,javascript EmmetInstall
     let g:user_emmet_install_global = 1
-    augroup emmetVim
-        autocmd FileType html,css,php,md,javascript EmmetInstall
-    augroup END
-    let g:user_emmet_mode='nvi'                              " work for all mode +insert, +normal and +visual
+    let g:user_emmet_mode           = 'nvi' " work for all mode +insert, +normal and +visual
 
 " Plug 'vim-latex/vim-latex', {'for': 'tex'}                   " old yet powerful
 "     " OPTIONAL: Starting with Vim 7, the filetype of empty .tex files defaults to 
 "     " 'plaintext' instead of 'tex', which results in vim-latex not being loaded.
 "     " The following changes the default filetype back to 'tex':
 
-Plug 'sheerun/vim-polyglot'                " A collection of language packs for Vim. But it mostly supplies more syntax highlight, so it more suited in Apperance area;)
-    let g:polyglot_disabled = ['markdown'] " Already has vim-markdown
+" A collection of language support packs for Vim. But it mostly supplies more syntax
+" highlight, so it may more suited in Apperance area
+Plug 'sheerun/vim-polyglot'                
+    let g:polyglot_disabled = [ 'markdown' ] " Already has vim-markdown
 
 " Plug 'rust-lang/rust.vim', {'for': 'rust'}                    " rust official language support
 
 " Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries', 'for': 'go'} " golang language support
 
+" 自动格式化、标准化中文排版。参考
+" [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
+Plug 'hotoo/pangu.vim' 
+
 """"""""""""""
 " Appearance "
 """"""""""""""
-
 " Beware of that colorschemes are based on syntax, if your used the built-in
 " syntax, then some highlight setting may no work at all!, add some langauges
 " syntax plug-in to improve the perfermence, like the vim-polyglot plug-in
 
-Plug 'vim-scripts/ScrollColors'             " Navigating Color schemes via h/j/k/l
+" Navigating Color schemes via h/j/k/l
+Plug 'vim-scripts/ScrollColors'
 
-Plug 'altercation/vim-colors-solarized'     " Solarized Colorscheme
+" Solarized Colorscheme
+Plug 'altercation/vim-colors-solarized'
     let g:solarized_termcolors=256
 
-Plug 'joshdick/onedark.vim'                 " One-dark color schemes
-    let g:onedark_hide_endofbuffer=1        " set to 1 if you want to hide end-of buffer filler lines (~) for a cleaner look
-    let onedark_terminal_italics=1
+" One-dark color schemes
+Plug 'joshdick/onedark.vim'
+    let g:onedark_hide_endofbuffer = 1 " set to 1 if you want to hide end-of buffer filler lines (~) for a cleaner look
+    let onedark_terminal_italics   = 1
 
-Plug 'morhetz/gruvbox'                      " Yet Another Color Schemes
-    let g:gruvbox_italic=1                  " enforce displaying italics
-    let g:gruvbox_bold=1
-    let g:gruvbox_underline=1
-    let g:gruvbox_undercurl=1
-    let g:gruvbox_inverse=0                 " increase contrast/brightenss of visual selection
+" Yet Another Color Schemes
+Plug 'morhetz/gruvbox'
+    let g:gruvbox_italic    = 1 " enforce displaying italics
+    let g:gruvbox_bold      = 1
+    let g:gruvbox_underline = 1
+    let g:gruvbox_undercurl = 1
+    let g:gruvbox_inverse   = 0 " increase contrast/brightenss of visual selection
 
 Plug 'tomasr/molokai'
 
-Plug 'dracula/vim', {'as':'dracula'}
-    let g:dracula_italic=1                  " enforce displaying italics
-    let g:dracula_bold=1
-    let g:dracula_underline=1
-    let g:dracula_undercurl=1
-    let g:dracula_inverse=1                 " increase contrast/brightenss of visual selection
+Plug 'dracula/vim', { 'as':'dracula' }
+    let g:dracula_italic    = 1 " enforce displaying italics
+    let g:dracula_bold      = 1
+    let g:dracula_underline = 1
+    let g:dracula_undercurl = 1
+    let g:dracula_inverse   = 1 " increase contrast/brightenss of visual selection
 
 Plug 'jnurmine/Zenburn'
-    let g:zenburn_high_Contrast=1           " 1: the CursorBar will be bold
-    let g:zenburn_disable_bold_CursorBars=1 " 1: if you hate the bold cursorline
-    let g:zenburn_transparent=0             " 1: set the background to black
-    let g:zenburn_italic_Comment=1          " 1: make comment italic
-    let g:zenburn_alternate_Visual=1        " 1: increase the contrast/brightenss of the Visual selection
-    let g:zenburn_disable_Label_underline=0 " To disableunderlining for Labels, set to 1
+    let g:zenburn_high_Contrast           = 1 " 1: the CursorBar will be bold
+    let g:zenburn_disable_bold_CursorBars = 1 " 1: if you hate the bold cursorline
+    let g:zenburn_transparent             = 0 " 1: set the background to black
+    let g:zenburn_italic_Comment          = 1 " 1: make comment italic
+    let g:zenburn_alternate_Visual        = 1 " 1: increase the contrast/brightenss of the Visual selection
+    let g:zenburn_disable_Label_underline = 0 " To disableunderlining for Labels, set to 1
 
-Plug 'vim-airline/vim-airline'              " Beautify status bar
+" Beautify status bar
+Plug 'vim-airline/vim-airline'
+" Themes for airline
+Plug 'vim-airline/vim-airline-themes'       
 
-Plug 'vim-airline/vim-airline-themes'       " Themes for airline
-
-Plug 'luochen1990/rainbow'                  " Support rainbow parentheses
-    let g:rainbow_active = 1                " set to 0 if you want to enable it later via :RainbowToggle
+" Support rainbow parentheses
+Plug 'luochen1990/rainbow'
+    let g:rainbow_active = 1 " set to 0 if you want to enable it later via :RainbowToggle
     " Disable rainbow for css and html, because it disable the highlight for html tag attribute
     let g:rainbow_conf = {
             \   'separately': {
@@ -121,52 +140,59 @@ Plug 'luochen1990/rainbow'                  " Support rainbow parentheses
             \}
         \}
 
-Plug 'ap/vim-css-color'                     " Css color preview
+" Css color preview
+Plug 'ap/vim-css-color'                     
 
-Plug 'Yggdroot/indentLine'                  " indentation
+" Indentation
+Plug 'Yggdroot/indentLine'                  
 
 """"""""
 " Edit "
 """"""""
-Plug 'godlygeek/tabular'    " Vim script for text filter and alignment based on regex
+" Vim script for text filter and alignment based on regex
+Plug 'godlygeek/tabular' 
 
-Plug 'tpope/vim-repeat'     " Repeat support plug like surround
+" Repeat support plug like surround
+Plug 'tpope/vim-repeat'     
 
-Plug 'tpope/vim-surround'   " simply quoting and parenthesizing
+" Simply quoting and parenthesizing
+Plug 'tpope/vim-surround'   
 
-Plug 'tpope/vim-commentary' " commentray easily
+" Commentray easily just `gcc`
+Plug 'tpope/vim-commentary' 
 
-Plug 'jiangmiao/auto-pairs' " Insert or delete brackets, parens, quotes in pair.
-    " This sets |AutoPairs| to only match for parenthesis listed in {} for 'FILETYPE'.
-    " which in here is none
-    augroup autoPairs
-        au Filetype tex let b:AutoPairs = {}
-    augroup END
+" Insert or delete brackets, parens, quotes in pair.
+Plug 'jiangmiao/auto-pairs' 
+    " This sets |AutoPairs| to only match for parenthesis listed in {} for 'FILETYPE'. Which in here is none
+    autocmd Filetype tex let b:AutoPairs = {}
 
 
 """"""""""""
 " Movement "
 """"""""""""
-Plug 'easymotion/vim-easymotion' " motion with speed!
+" Motion with speed!
+Plug 'easymotion/vim-easymotion' 
 
-Plug 'tpope/vim-unimpaired'      " mapping [] with many useful keys and commands
+" Mapping [] with many useful keys and commands
+Plug 'tpope/vim-unimpaired'      
 
-Plug 'vim-scripts/matchit.zip'   " extended % matching for HTML, LaTeX, and many other languages
+" Extended % matching for HTML, LaTeX, and many other languages
+Plug 'vim-scripts/matchit.zip'   
 
 """""""""""""""
 " Integration "
 """""""""""""""
-" Plug 'tpope/vim-fugitive'              " A powerful bind of Git for Vim
+" Enable run command background
+Plug 'skywind3000/asyncrun.vim' 
 
-Plug 'skywind3000/asyncrun.vim' " enable run command background
+" Visual undo tree manipulation
+" Plug 'sjl/gundo.vim'            
 
-Plug 'sjl/gundo.vim'            " Visual undo tree manipulation
+" File tree like modern IDE
+Plug 'scrooloose/nerdtree'      
 
-Plug 'scrooloose/nerdtree'      " File tree like modern IDE
-
-" Plug 'mileszs/ack.vim'          " built-in ack for Vim
-
-Plug 'majutsushi/tagbar'        " tag list
+" Tag list
+Plug 'majutsushi/tagbar'        
 
 " Vim sugar for the UNIX shell commands that need it the most, 
 " no need `r! sudo tee % > /dev/null` just SudoWrite
