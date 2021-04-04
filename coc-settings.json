@@ -1,9 +1,5 @@
 {
     "languageserver": {
-        /**
-         * @target: C-family
-         * @install: sudo apt install ccls 
-         */
         "ccls": {
             "command": "ccls",
             "filetypes": [ "c", "cc", "cpp", "c++", "objc", "objcpp" ],
@@ -14,30 +10,12 @@
                 }
             }
         }
-        
-        /**
-         * @target: CMake
-         * @install: pip3 install cmake-language-server 
-         */
-        /* "cmake": { */
-        /*     "command": "cmake-language-server", */
-        /*     "filetypes": [ "cmake" ], */
-        /*     "rootPatterns": [ "build/" ], */
-        /*     "initializationOptions": { */
-        /*         "buildDirectory": "build" */
-        /*     } */
-        /* } */
     },
 
-    /* config for coc-cmake */
-    /* @depends:
-     *  cmake: sudo apt install cmake
-     *  cmake-format: pip3 install cmakelang
-     *  cmake-language-server: pip3 install cmake-language-server
-     */
+    "python.pythonPath": "python3",
+
     "cmake.cmakePath": "cmake",
     "cmake.formatter": "cmake-format",
-    /* Note: the functionality(completion, formatting, etc.) of lsp and extension builtin can not coexist */
     "cmake.lsp.enable": true,
     "cmake.lsp.serverPath": "cmake-language-server",
     "cmake.lsp.buildDirectory": "build"
