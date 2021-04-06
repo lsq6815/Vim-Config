@@ -1,5 +1,9 @@
 {
     "languageserver": {
+        /**
+         * @target       :  C-family languages
+         * @installation :  sudo apt install ccls
+         */
         "ccls": {
             "command": "ccls",
             "filetypes": [ "c", "cc", "cpp", "c++", "objc", "objcpp" ],
@@ -12,10 +16,25 @@
         }
     },
 
+    "coc.source.emoji.enable": true,
+    "coc.source.emoji.filetypes": [ "markdown" ],
+    "coc.source.emoji.triggerCharacters": [ ":" ],
+
     "python.pythonPath": "python3",
 
+    "html.autoClosingTags": true,
+
+    "css.lint.float": "error", // flex-box is better
+
+    /**
+     * @dependences:
+     *   cmake                 : sudo apt install cmake
+     *   cmake-format          : pip3 install cmakelang
+     *   cmake-language-server : pip3 install cmake-language-server
+     */
     "cmake.cmakePath": "cmake",
     "cmake.formatter": "cmake-format",
+    // Notice that the lsp and extensions builtin can't co-exist
     "cmake.lsp.enable": true,
     "cmake.lsp.serverPath": "cmake-language-server",
     "cmake.lsp.buildDirectory": "build"

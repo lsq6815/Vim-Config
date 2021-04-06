@@ -23,15 +23,21 @@ Plug 'junegunn/vim-plug'
 """"""""""""""""""""
 " Smooth language-server-provider experience like VScode
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
-    let g:coc_global_extensions = [ 
+    let g:coc_global_extensions = [
                 \ 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 
-                \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp',
+                \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-lua',
                 \ 'coc-cmake',
+                \ 'coc-emoji', 'coc-word',
                 \ 'coc-marketplace'
                 \]
     let g:tex_flavor = 'latex' " prevent Vim for treat empty .tex file as plaintext
 
+" Syntax highlighting for CJSON (JSON with Comments) in Vim
+" useful when you edit configure in JSON format
+Plug 'neoclide/jsonc.vim'
+
 Plug 'dense-analysis/ale'
+    let g:ale_disable_lsp = 1
     let g:ale_c_cc_options = '-Wall -O2 -std=c99'
     let g:ale_cpp_cc_options = '-Wall -O2 -std=c++1z'
     let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
