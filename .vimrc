@@ -31,6 +31,9 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
                 \ 'coc-marketplace'
                 \]
     let g:tex_flavor = 'latex' " prevent Vim for treat empty .tex file as plaintext
+    " required by coc-vimlsp
+    let g:markdown_fenced_languages = [
+                \ 'vim', 'help' ]
 
 " Syntax highlighting for CJSON (JSON with Comments) in Vim
 " useful when you edit configure in JSON format
