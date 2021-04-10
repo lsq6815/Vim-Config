@@ -11,10 +11,10 @@ endif
 " you can find plugins in vim.org github.com and vimawesome.com
 " I recommend vimawesome.com, because it collect plugins from the first two
 " website
-"
-" - Automatically executes `filetype plugin indent on` and `syntax enable`
+
+" Automatically executes `filetype plugin indent on` and `syntax enable`
 call plug#begin('~/.vim/plugged')
-" vim-plug itself, just for its help document
+" vim-plug itself, just for its help documentation
 Plug 'junegunn/vim-plug' 
     let g:plug_timeout = 300 " Time limit of each task in seconds (Ruby & Python)
 
@@ -41,6 +41,7 @@ Plug 'neoclide/jsonc.vim'
 
 Plug 'dense-analysis/ale'
     let g:ale_disable_lsp = 1
+    " Use modern C/C++
     let g:ale_c_cc_options = '-Wall -O2 -std=c99'
     let g:ale_cpp_cc_options = '-Wall -O2 -std=c++1z'
     let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
@@ -62,7 +63,9 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
     let g:vim_markdown_math = 1 " Enable LaTeX math
 
 " Markdown preview based on Web
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && ./install.sh', 'for': 'markdown' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+    let g:mkdp_auto_start = 0 " start after entering markdown buffer
+    let g:mkdp_auto_close = 1 " close when change from markdown buffer to other buffer
 
 " A Emmet implementation for Vim 
 Plug 'mattn/emmet-vim'
@@ -397,12 +400,16 @@ if has('autocmd')
     augroup END
 endif
 
-colorscheme dracula                 " change the color scheme
-set background=dark                 " As the name say
-set nocursorline                      " set the current line highlighting
-set incsearch                       " Enable searching as you type, rather than waiting till you press enter.
-set number                          " set the line number
-set showcmd                         " show key pressed in status bar on normal mode
+set background=dark " As the name say
+colorscheme dracula " change the color scheme
+" Wanna a transparent background
+" need go below the `colorscheme *`
+" NOTE: should go below `set background=*` too
+hi Normal guibg=NONE ctermbg=NONE   
+set nocursorline    " set the current line highlighting
+set incsearch       " Enable searching as you type, rather than waiting till you press enter.
+set number          " set the line number
+set showcmd         " show key pressed in status bar on normal mode
 
 " Disable audible bell because it's annoying.
 set noerrorbells visualbell t_vb=
