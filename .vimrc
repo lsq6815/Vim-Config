@@ -25,8 +25,10 @@ Plug 'junegunn/vim-plug'
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     let g:coc_global_extensions = [
                 \ 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 
+                \ 'coc-html-css-support', 'coc-htmlhint',
                 \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-lua',
                 \ 'coc-cmake',
+                \ 'coc-texlab',
                 \ 'coc-emoji', 'coc-word',
                 \ 'coc-marketplace'
                 \]
@@ -38,6 +40,10 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " Syntax highlighting for CJSON (JSON with Comments) in Vim
 " useful when you edit configure in JSON format
 Plug 'neoclide/jsonc.vim'
+
+" add the missing semantic highlighting of cxx lsp (cquery, ccls, and clangd)
+" Is is SEMANTIC highlight!
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 Plug 'dense-analysis/ale'
     let g:ale_disable_lsp = 1
@@ -177,7 +183,8 @@ Plug 'tpope/vim-commentary'
 " Insert or delete brackets, parens, quotes in pair.
 Plug 'jiangmiao/auto-pairs' 
     " This sets |AutoPairs| to only match for parenthesis listed in {} for 'FILETYPE'. Which in here is none
-    autocmd Filetype tex let b:AutoPairs = {}
+    " Switch from vim-latex to vimlab, which do not handle auto-pairs itself, so this configure is no use now.
+    " autocmd Filetype tex let b:AutoPairs = {}
 
 
 """"""""""""

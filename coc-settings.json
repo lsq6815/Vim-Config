@@ -7,10 +7,18 @@
         "ccls": {
             "command": "ccls",
             "filetypes": [ "c", "cc", "cpp", "c++", "objc", "objcpp" ],
-            "rootPatterns": [ ".ccls", "compile_commands.json", ".git/", ".hg/" ],
+            "rootPatterns": [ ".ccls", "compile_commands.json", ".git/", ".hg/", ".vim/" ],
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"
+                },
+                /* required by vim-lsp-cxx-highlight */
+                "highlight": {
+                    "lsRanges": true
+                },
+                /* Do not warning code use c++17 standard */
+                "clang": {
+                    "extraArgs": [ "-std=c++17" ]
                 }
             }
         }
@@ -19,12 +27,29 @@
     "coc.source.emoji.enable": true,
     "coc.source.emoji.filetypes": [ "markdown" ],
     "coc.source.emoji.triggerCharacters": [ ":" ],
+    
+    "latex.build.forwardSearchAfter": true,
+    "latex.forwardSearch.executable": "/mnt/d/ScoopData/ScoopApps/shims/sumatrapdf.exe",
+    "latex.forwardSearch.args": [
+        "-resue-instance",
+        "%p",
+        "-forward-search",
+        "%f",
+        "%l"
+    ],
 
     "python.pythonPath": "python3",
 
     "html.autoClosingTags": true,
 
     "css.lint.float": "error", // flex-box is better
+
+    "html-css-support.enabledLanguages": [
+        "html", "vue", "blade"
+    ],
+    "html-css-support.styleSheets": [
+
+    ],
 
     /**
      * @dependences:
