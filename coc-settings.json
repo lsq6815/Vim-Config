@@ -28,6 +28,12 @@
     "coc.source.emoji.filetypes": [ "markdown" ],
     "coc.source.emoji.triggerCharacters": [ ":" ],
     
+    "latex.build.args": [
+        "-pdf",
+        "-xelatex",
+        "-interaction=nonstopmode",
+        "-synctex=1"
+    ],
     "latex.build.forwardSearchAfter": true,
     "latex.forwardSearch.executable": "/mnt/d/ScoopData/ScoopApps/shims/sumatrapdf.exe",
     "latex.forwardSearch.args": [
@@ -37,6 +43,8 @@
         "%f",
         "%l"
     ],
+
+    "xml.completion.autoCloseTags": true,
 
     "python.pythonPath": "python3",
 

@@ -24,9 +24,14 @@ Plug 'junegunn/vim-plug'
 " Smooth language-server-provider experience like VScode
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     let g:coc_global_extensions = [
+                "\ for front-end dev
                 \ 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 
                 \ 'coc-html-css-support', 'coc-htmlhint',
+                "\ for scripting languages
                 \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-lua',
+                "\ lsp for .clang-format file
+                \ 'coc-clang-format-style-options',
+                \ 'coc-xml',
                 \ 'coc-cmake',
                 \ 'coc-texlab',
                 \ 'coc-emoji', 'coc-word',
@@ -41,7 +46,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 " useful when you edit configure in JSON format
 Plug 'neoclide/jsonc.vim'
 
-" add the missing semantic highlighting of cxx lsp (cquery, ccls, and clangd)
+" Add the missing semantic highlighting of cxx lsp (cquery, ccls, and clangd)
 " Is is SEMANTIC highlight!
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
