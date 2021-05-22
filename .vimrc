@@ -31,6 +31,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
                 \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-lua',
                 "\ lsp for .clang-format file
                 \ 'coc-clang-format-style-options',
+                \ 'coc-markdownlint',
                 \ 'coc-xml',
                 \ 'coc-cmake',
                 \ 'coc-texlab',
@@ -72,6 +73,7 @@ Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
 " Syntax highlighting, matching rules and mappings for the original Markdown and extensions.
 Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
     let g:vim_markdown_math = 1 " Enable LaTeX math
+    let g:vim_markdown_strikethrough = 1 " Enable ~~cancellation~~
 
 " Markdown preview based on Web
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
