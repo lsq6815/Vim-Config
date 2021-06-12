@@ -51,15 +51,15 @@ Plug 'neoclide/jsonc.vim'
 " Is is SEMANTIC highlight!
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 
-Plug 'dense-analysis/ale'
-    let g:ale_disable_lsp = 1
-    " Use modern C/C++
-    let g:ale_c_cc_options = '-Wall -O2 -std=c99'
-    let g:ale_cpp_cc_options = '-Wall -O2 -std=c++1z'
-    let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-    let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++1z'
-    let g:ale_c_clang_options = '-Wall -O2 -std=c99'
-    let g:ale_cpp_clang_options = '-Wall -O2 -std=c++1z'
+" Plug 'dense-analysis/ale'
+"     let g:ale_disable_lsp = 1
+"     " Use modern C/C++
+"     let g:ale_c_cc_options = '-Wall -O2 -std=c99'
+"     let g:ale_cpp_cc_options = '-Wall -O2 -std=c++1z'
+"     let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+"     let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++1z'
+"     let g:ale_c_clang_options = '-Wall -O2 -std=c99'
+"     let g:ale_cpp_clang_options = '-Wall -O2 -std=c++1z'
     
 " DoGe is a Documentation Generator
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
