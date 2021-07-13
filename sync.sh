@@ -5,6 +5,7 @@
 ######################################################
 
 # Generate full path of backup directory
+# Backup directory is the directory where bash script laying
 backup_dir="$(realpath "$(dirname -- "$0")")"
 
 # Write your local config files down here

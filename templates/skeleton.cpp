@@ -31,6 +31,9 @@
 /* Misc */
 #include <string>
 #include <regex>
+/* File System Support */
+#include <filesystem>
+namespace fs = std::filesystem;
 
 int main(int argc, char **argv) {
 }

@@ -59,6 +59,8 @@
 
     ],
 
+    "omnisharp.trace.server": "information",
+
     /**
      * @dependences:
      *   cmake                 : sudo apt install cmake

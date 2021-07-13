@@ -24,6 +24,8 @@ Plug 'junegunn/vim-plug'
 " Smooth language-server-provider experience like VScode
 Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     let g:coc_global_extensions = [
+                "\ for general-purpose language
+                \ 'coc-omnisharp',
                 "\ for front-end dev
                 \ 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 
                 \ 'coc-html-css-support', 'coc-htmlhint',
