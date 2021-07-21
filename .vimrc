@@ -121,6 +121,14 @@ Plug 'vim-scripts/ScrollColors'
 Plug 'altercation/vim-colors-solarized'
     let g:solarized_termcolors=256
 
+" A drak color scheme for Vim8/Neovim based off the Material Pale Night color
+" scheme
+Plug 'drewtempelmeyer/palenight.vim'
+    " configure airline to use this colorscheme
+    let g:airline_theme = "palenight"
+    " enable italics
+    let g:palenight_terminal_italics=1
+
 " One-dark color schemes
 Plug 'joshdick/onedark.vim'
     let g:onedark_hide_endofbuffer = 1 " set to 1 if you want to hide end-of buffer filler lines (~) for a cleaner look
@@ -401,8 +409,14 @@ set tabstop=4                 " Number of spaces that a <Tab> in the file counts
 
 " set backspace=2 " change the behavior of Backspace in most of terminal
 " just make the backspace work when in insert mode, better use <c-h> instead 
-if has('termguicolors')
-    set termguicolors                   " true color terminal, beyond term256color
+"
+
+if (has("nvim"))
+    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+endif
+
+if (has('termguicolors'))
+    set termguicolors " true color terminal, beyond term256color
 endif
 
 if has('autocmd')
@@ -417,9 +431,9 @@ if has('autocmd')
 endif
 
 set background=dark " As the name say
-colorscheme dracula " change the color scheme
-" Wanna a transparent background
-" need go below the `colorscheme *`
+colorscheme palenight " change the color scheme
+" If wanna a transparent background
+" need place `hi Normal guibg=NONE, ctermbg=NONE` below the `colorscheme *`
 " NOTE: should go below `set background=*` too
 hi Normal guibg=NONE ctermbg=NONE   
 set nocursorline    " set the current line highlighting

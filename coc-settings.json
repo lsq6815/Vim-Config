@@ -16,9 +16,11 @@
                 "highlight": {
                     "lsRanges": true
                 },
-                /* Do not warning code use c++17 standard */
+                /* Do not warning code use c++20 standard */
                 "clang": {
-                    "extraArgs": [ "-std=c++17" ]
+                    "extraArgs": [ 
+                        "-std=c++20"
+                    ]
                 }
             }
         }
