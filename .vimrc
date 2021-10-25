@@ -29,6 +29,10 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
                 "\ for front-end dev
                 \ 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 
                 \ 'coc-html-css-support', 'coc-htmlhint',
+                "\ Note you have to install `eslint` and `eslint-plugin-vue` by
+                "\   npm i eslint eslint-plugin-vue -D
+                "\ in your project root for this extension to work   
+                \ 'coc-vetur',
                 "\ for scripting languages
                 \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-lua',
                 "\ lsp for .clang-format file
@@ -433,7 +437,7 @@ endif
 set background=dark " As the name say
 colorscheme palenight " change the color scheme
 " If wanna a transparent background
-" need place `hi Normal guibg=NONE, ctermbg=NONE` below the `colorscheme *`
+" need place `hi Normal guibg=NONE, ctermbg=NONE` below the `c3olorscheme *`
 " NOTE: should go below `set background=*` too
 hi Normal guibg=NONE ctermbg=NONE   
 set nocursorline    " set the current line highlighting
