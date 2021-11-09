@@ -39,6 +39,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
                 \ 'coc-clang-format-style-options',
                 \ 'coc-markdownlint',
                 \ 'coc-xml',
+                \ 'coc-yaml',
                 \ 'coc-cmake',
                 \ 'coc-texlab',
                 \ 'coc-emoji', 'coc-word',
@@ -123,7 +124,7 @@ Plug 'vim-scripts/ScrollColors'
 
 " Solarized Colorscheme
 Plug 'altercation/vim-colors-solarized'
-    let g:solarized_termcolors=26
+    let g:solarized_termcolors=256
 
 " A drak color scheme for Vim8/Neovim based off the Material Pale Night color
 " scheme
@@ -437,7 +438,7 @@ endif
 set background=dark " As the name say
 colorscheme palenight " change the color scheme
 " If wanna a transparent background
-" need place `hi Normal guibg=NONE, ctermbg=NONE` below the `colorscheme *`
+" need place `hi Normal guibg=NONE, ctermbg=NONE` below the `c3olorscheme *`
 " NOTE: should go below `set background=*` too
 hi Normal guibg=NONE ctermbg=NONE   
 set nocursorline    " set the current line highlighting
