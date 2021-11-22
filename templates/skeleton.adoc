@@ -1,0 +1,7 @@
+= Document Title
+:author: LSQ
+:email: lsq6815@gmail.com
+:source-highlighter: highlight.js
+:toc:
+// 记得把 VScode 的预览安全策略改为 disable
+:stem: latexmath

@@ -432,6 +432,7 @@ if has('autocmd')
         autocmd BufNewFile *.cpp 0r ~/.vim/templates/skeleton.cpp
         autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
         autocmd BufNewFile makefile,Makefile,GMakefile 0r ~/.vim/templates/makefile
+        autocmd BufNewFile *.adoc 0r ~/.vim/templates/skeleton.adoc
     augroup END
 endif
 
