@@ -3,5 +3,9 @@
 :email: lsq6815@gmail.com
 :source-highlighter: highlight.js
 :toc:
+// 取消之前的 TOC 排版策略，改为手动使用「toc::[]」放置 TOC
+:toc-placement!:
 // 记得把 VScode 的预览安全策略改为 disable
 :stem: latexmath
+
+toc::[]
