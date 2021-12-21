@@ -29,10 +29,8 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
                 "\ for front-end dev
                 \ 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 
                 \ 'coc-html-css-support', 'coc-htmlhint',
-                "\ NOTE: you have to install `eslint` and `eslint-plugin-vue` by
-                "\   npm i eslint eslint-plugin-vue -D
-                "\ in your project root for this extension to work   
-                \ 'coc-vetur',
+                "\ switch from vetur to volar
+                \ '@yaegassy/coc-volar',
                 "\ for scripting languages
                 \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-lua',
                 "\ lsp for .clang-format file

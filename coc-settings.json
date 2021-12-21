@@ -6,8 +6,21 @@
          */
         "ccls": {
             "command": "ccls",
-            "filetypes": [ "c", "cc", "cpp", "c++", "objc", "objcpp" ],
-            "rootPatterns": [ ".ccls", "compile_commands.json", ".git/", ".hg/", ".vim/" ],
+            "filetypes": [
+                "c",
+                "cc",
+                "cpp",
+                "c++",
+                "objc",
+                "objcpp"
+            ],
+            "rootPatterns": [
+                ".ccls",
+                "compile_commands.json",
+                ".git/",
+                ".hg/",
+                ".vim/"
+            ],
             "initializationOptions": {
                 "cache": {
                     "directory": "/tmp/ccls"
@@ -18,18 +31,20 @@
                 },
                 /* Do not warning code use c++20 standard */
                 "clang": {
-                    "extraArgs": [ 
+                    "extraArgs": [
                         "-std=c++20"
                     ]
                 }
             }
         }
     },
-
     "coc.source.emoji.enable": true,
-    "coc.source.emoji.filetypes": [ "markdown" ],
-    "coc.source.emoji.triggerCharacters": [ ":" ],
-    
+    "coc.source.emoji.filetypes": [
+        "markdown"
+    ],
+    "coc.source.emoji.triggerCharacters": [
+        ":"
+    ],
     /* "latex.build.args": [ */
     /*     "-pdf", */
     /*     "-xelatex", */
@@ -45,29 +60,28 @@
     /*     "%f", */
     /*     "%l" */
     /* ], */
-
     "xml.completion.autoCloseTags": true,
-
     "python.pythonPath": "python3",
-
+    "html.filetypes": [
+        "html",
+        "handlebars",
+        "htmldjango",
+        "blade",
+        "vue"
+    ],
     "html.autoClosingTags": true,
-
     "css.lint.float": "error", // flex-box is better
-
     "html-css-support.enabledLanguages": [
-        "html", "vue", "blade"
+        "html",
+        "vue",
+        "blade"
     ],
-    "html-css-support.styleSheets": [
-
-    ],
-
+    "html-css-support.styleSheets": [],
     "vetur.ignoreProjectWarning": true,
     "vetur.validation.templateProps": true,
     "vetur.format.options.tabSize": 4,
     "vetur.trace.server": "verbose",
-
     "omnisharp.trace.server": "information",
-
     /**
      * @dependences:
      *   cmake                 : sudo apt install cmake
