@@ -241,6 +241,11 @@ Plug 'majutsushi/tagbar'
 " no need `r! sudo tee % > /dev/null` just SudoWrite
 Plug 'https://github.com/tpope/vim-eunuch.git'    
 
+" Adds icons to Your Plugins
+" NOTE: Always load the vim-devicons as the very last one
+" since it modify other plugins like `vim-startify`, `vim-nerdtree`
+Plug 'ryanoasis/vim-devicons'
+
 call plug#end()
 
 """"""""""""""""""""""""""""""""""""""
@@ -250,7 +255,7 @@ call plug#end()
 " for completion                     "
 """"""""""""""""""""""""""""""""""""""
 
-set encoding=utf-8 " Anyone with sane use Unicode, and coc.nvim use it too
+set encoding=UTF-8 " Anyone with sane use Unicode, and coc.nvim use it too
 set hidden         " TextEdit might fail if hidden is not set
 set nobackup       " Some servers have issues with backup files, see #649
 set nowritebackup
