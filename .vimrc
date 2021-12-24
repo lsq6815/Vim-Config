@@ -114,8 +114,11 @@ Plug 'hotoo/pangu.vim'
 " Appearance "
 """"""""""""""
 " Beware of that colorschemes are based on syntax, if your used the built-in
-" syntax, then some highlight setting may no work at all!, add some langauges
+" syntax, then some highlight setting may not work at all!, add some langauges
 " syntax plug-in to improve the perfermence, like the vim-polyglot plug-in
+
+" The fancy start screen for Vim8 / Neovim
+Plug 'mhinz/vim-startify'
 
 " Navigating Color schemes via h/j/k/l
 Plug 'vim-scripts/ScrollColors'
@@ -403,11 +406,16 @@ packloadall                    " load all plugins
 silent! helptags ALL           " load help document for all plugins
 
 set foldmethod=indent         " fold lines by them indent
-set nofoldenable              " but have folds open by default
 set autoindent                " Copy indent from current line when starting a new line.
-set shiftwidth=4              " the space number used to indentation
-set expandtab                 " In Insert mode: Use the appropriate number of spaces to insert a <Tab>.  Spaces are used in indents with the '>' and '<' commands and when 'autoindent' is on.
-set tabstop=4                 " Number of spaces that a <Tab> in the file counts for (default 8)
+set nofoldenable              " but have folds open by default
+
+" handle tabs as 4 spaces, in every direction, consistently
+set tabstop=4     " Number of spaces that a <Tab> in the file counts for (default 8)
+set shiftwidth=4  " the space number used to indentation
+set smarttab
+set expandtab     " In Insert mode: Use the appropriate number of spaces to insert a <Tab>.  Spaces are used in indents with the '>' and '<' commands and when 'autoindent' is on.
+set softtabstop=4
+
 " set spell                     " Automatically set spell check
 
 " set backspace=2 " change the behavior of Backspace in most of terminal
