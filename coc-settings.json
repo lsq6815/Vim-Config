@@ -62,25 +62,35 @@
     /* ], */
     "xml.completion.autoCloseTags": true,
     "python.pythonPath": "python3",
+    /* coc-html */
     "html.filetypes": [
         "html",
         "handlebars",
         "htmldjango",
-        "blade",
-        "vue"
-    ],
-    "html.autoClosingTags": true,
-    "css.lint.float": "error", // flex-box is better
-    "html-css-support.enabledLanguages": [
-        "html",
-        "vue",
         "blade"
+        // "vue" may conflict with vetur / volar
     ],
-    "html-css-support.styleSheets": [],
-    "vetur.ignoreProjectWarning": true,
-    "vetur.validation.templateProps": true,
-    "vetur.format.options.tabSize": 4,
-    "vetur.trace.server": "verbose",
+    // <img src="*"> * standards for cursor
+    "html.completion.attributeDefaultValue": "doublequotes",
+    "html.autoClosingTags": true,
+    /* coc-css */
+    "css.lint.float": "error", // flex-box is better
+
+    /* coc-html-css-support */
+    "html-css-support.enabledLanguages": [
+        "html"
+    ],
+
+    /* coc-json */
+    // add schema for chrome manifest.json V3
+    "json.schemas": [{
+        "fileMatch": [
+            // At root
+            "/manifest.json"
+        ],
+        "url": "https://json.schemastore.org/chrome-manifest"
+    }],
+
     "omnisharp.trace.server": "information",
     /**
      * @dependences:
@@ -93,5 +103,8 @@
     // Notice that the lsp and extensions builtin can't co-exist
     "cmake.lsp.enable": true,
     "cmake.lsp.serverPath": "cmake-language-server",
-    "cmake.lsp.buildDirectory": "build"
+    "cmake.lsp.buildDirectory": "build",
+
+    /* coc-yaml */
+    "yaml.format.enable": true
 }

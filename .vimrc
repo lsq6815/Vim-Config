@@ -48,7 +48,14 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
     let g:tex_flavor = 'latex'
     " required by coc-vimlsp
     let g:markdown_fenced_languages = [ 'vim', 'help' ]
+    " required by coc-css for scss files
+    autocmd FileType scss setl iskeyword+=@-@
 
+" TypeScript Syntax for Vim
+Plug 'leafgarland/typescript-vim'
+    " for :make
+    let g:typescript_compiler_binary  = 'tsc'
+    let g:typescript_compiler_options = ''
 
 " Syntax highlighting for CJSON (JSON with Comments) in Vim
 " useful when you edit configure file in JSON format
@@ -73,7 +80,11 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }
     " Want to DoGe for language from other langauge, like Vue. Aliases it
     let g:doge_filetype_aliases = {
-                \ 'javascript': [ 'vue' ]
+                \ 'javascript': [
+                \ 'vue', 'typescript',
+                \ 'javascript.jsx', 'javascriptreact', 'javascript.tsx',
+                \ 'typescriptreact', 'typescript.tsx'
+                \]
                 \}
 
 " PHP language support
@@ -85,9 +96,9 @@ Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
     let g:vim_markdown_strikethrough = 1 " Enable ~~cancellation~~
 
 " Markdown preview based on Web
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
-    let g:mkdp_auto_start = 0 " start after entering markdown buffer
-    let g:mkdp_auto_close = 1 " close when change from markdown buffer to other buffer
+" Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+    " let g:mkdp_auto_start = 0 " start after entering markdown buffer
+    " let g:mkdp_auto_close = 1 " close when change from markdown buffer to other buffer
 
 " A Emmet implementation for Vim 
 Plug 'mattn/emmet-vim'
@@ -169,24 +180,24 @@ Plug 'jnurmine/Zenburn'
 
 " Beautify status bar
 Plug 'vim-airline/vim-airline'
-" Themes for airline
+" Themes for vim-airline
 Plug 'vim-airline/vim-airline-themes'       
 
 " Support rainbow parentheses
 Plug 'luochen1990/rainbow'
     " set to 0 if you want to enable it later via `:RainbowToggle`
     let g:rainbow_active = 1
-    " Disable rainbow for css and html
-    " because it disable the highlight for html tag attribute
+    " Disable rainbow for `css`, `html` and `nerdtree`
     let g:rainbow_conf = {
             \   'separately': {
                 \   '*': {},
+                \   'nerdtree': 0,
                 \   'css': 0,
                 \   'html': 0,
             \}
         \}
 
-" Css color preview like '#00ff11'
+" Css color highlight like '#00ff11'
 Plug 'ap/vim-css-color'                     
 
 " Indentation
@@ -195,10 +206,10 @@ Plug 'Yggdroot/indentLine'
 """"""""
 " Edit "
 """"""""
-"* Vim script for text filter and alignment based on regex
+" Vim script for text filter and alignment based on regex
 Plug 'godlygeek/tabular' 
 
-" Repeat support plug like surround
+" Repeat support plug like vim-surround
 Plug 'tpope/vim-repeat'     
 
 " Simply quoting and parenthesizing
@@ -224,7 +235,7 @@ Plug 'easymotion/vim-easymotion'
 " Mapping [] with many useful keys and commands
 Plug 'tpope/vim-unimpaired'      
 
-" Extended % matching for HTML, LaTeX, and many other languages
+" Extended '%' matching for HTML, LaTeX, and many other languages
 Plug 'vim-scripts/matchit.zip'   
 
 """""""""""""""
@@ -244,6 +255,8 @@ Plug 'majutsushi/tagbar'
 
 " Vim sugar for the UNIX shell commands that need it the most, 
 " no need `r! sudo tee % > /dev/null` just `SudoWrite`
+" NOTE: you can set $EDITOR and edit file with `sudo -e`
+" this also work
 Plug 'https://github.com/tpope/vim-eunuch.git'    
 
 " Adds icons to Your Plugins
