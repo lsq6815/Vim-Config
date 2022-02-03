@@ -7,5 +7,6 @@
 :toc-placement!:
 // 记得把 VScode 的预览安全策略改为 disable
 :stem: latexmath
+:icons: font
 
 toc::[]

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-from urllib.request import urlopen
 
-from bs4 import BeautifulSoup
-from matplotlib import pyplot as plt
-import numpy as np
+import sys
+import os
+import shutil # shell util
+
+def main(plist: list[str]):
+    pass
 
 if __name__ == "__main__":
-    pass
+    main(sys.argv)
