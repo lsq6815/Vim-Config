@@ -39,6 +39,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
                 \ 'coc-markdownlint',
                 \ 'coc-xml',
                 \ 'coc-yaml',
+                \ 'coc-toml',
                 \ 'coc-cmake',
                 \ 'coc-texlab',
                 \ 'coc-emoji', 'coc-word',
