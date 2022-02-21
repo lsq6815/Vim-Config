@@ -31,7 +31,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
                 \ 'coc-css', 'coc-html', 'coc-json', 'coc-tsserver', 
                 \ 'coc-html-css-support', 'coc-htmlhint',
                 "\ switch from vetur to volar
-                \ '@yaegassy/coc-volar',
+                \ 'coc-vetur',
                 "\ for scripting languages
                 \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-lua',
                 "\ lsp for .clang-format file
@@ -443,6 +443,13 @@ set smarttab
 " Spaces are used in indents with the '>' and '<' commands and when 'autoindent' is on.
 set expandtab     
 set softtabstop=4
+
+" indentation for specified file type
+if has('autocmd')
+    augroup indentation
+        autocmd FileType html,javascript,css,vue setlocal tabstop=2 shiftwidth=2 softtabstop=2 smarttab expandtab 
+    augroup END
+endif
 
 " set spell " Automatically set spell check
 
