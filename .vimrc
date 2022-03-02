@@ -33,7 +33,7 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
                 "\ switch from vetur to volar
                 \ 'coc-vetur',
                 "\ for scripting languages
-                \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-lua',
+                \ 'coc-phpls', 'coc-pyright', 'coc-sh', 'coc-vimlsp', 'coc-lua', 
                 "\ lsp for .clang-format file
                 \ 'coc-clang-format-style-options',
                 \ 'coc-markdownlint',
@@ -121,6 +121,9 @@ Plug 'sheerun/vim-polyglot'
 " 自动格式化、标准化中文排版。参考
 " [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
 Plug 'hotoo/pangu.vim' 
+    let g:pangu_rule_date            = 1
+    let g:pangu_punctuation_brackets = ["「", "」"]
+    let g:pangu_punctuation_ellipsis = "……"
 
 """"""""""""""
 " Appearance "
@@ -447,7 +450,7 @@ set softtabstop=4
 " indentation for specified file type
 if has('autocmd')
     augroup indentation
-        autocmd FileType html,javascript,css,vue setlocal tabstop=2 shiftwidth=2 softtabstop=2 smarttab expandtab 
+        autocmd FileType vue setlocal tabstop=2 shiftwidth=2 softtabstop=2 smarttab expandtab 
     augroup END
 endif
 
