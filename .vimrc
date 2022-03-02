@@ -121,9 +121,10 @@ Plug 'sheerun/vim-polyglot'
 " 自动格式化、标准化中文排版。参考
 " [中文文案排版指北](https://github.com/sparanoid/chinese-copywriting-guidelines)
 Plug 'hotoo/pangu.vim' 
-    let g:pangu_rule_date            = 1
-    let g:pangu_punctuation_brackets = ["「", "」"]
-    let g:pangu_punctuation_ellipsis = "……"
+    let g:pangu_rule_date                = 1
+    let g:pangu_rule_spacing_punctuation = 1
+    let g:pangu_punctuation_brackets     = ["「", "」"]
+    let g:pangu_punctuation_ellipsis     = "……"
 
 """"""""""""""
 " Appearance "
