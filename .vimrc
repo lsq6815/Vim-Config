@@ -185,6 +185,10 @@ Plug 'jnurmine/Zenburn'
 
 " Beautify status bar
 Plug 'vim-airline/vim-airline'
+    " Automatically displays all buffers when there's only one tab open
+    let g:airline#extensions#tabline#enabled   = 1
+    " ensuer you had powerline-fonts installed
+    let g:airline_powerline_fonts              = 1
 " Themes for vim-airline
 Plug 'vim-airline/vim-airline-themes'       
 
